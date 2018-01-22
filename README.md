@@ -1,3 +1,14 @@
+## Quickstart
+
+This is a React javascript code.
+
+To build and run this code, use the following commands after cloning and installing node/npm:
+1. npm install
+1. npm run build
+1. serve -s build
+
+## Details
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
