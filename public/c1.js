@@ -139,3 +139,71 @@
 
                 ]
     });
+
+    var fnmenu = {
+       "delete":function(treeID,rowID){
+                var r = confirm("Are you sure you want to delete treeID '" + treeID + "'?");
+
+		if (r == true) 
+		{
+
+     
+		
+			var request = $.ajax({
+			  url: "/api/trees",
+			  method: "DELETE",
+			  data: '{"id": ' + parseInt(treeID) + '}',
+		          dataType: "json",
+			  contentType: "application/json; charset=utf-8"
+			});
+			 
+			request.done(function( msg ) {
+                          table7.row(rowID).remove();
+                          table7.draw(false);  
+
+			});
+			 
+			request.fail(function( jqXHR, textStatus ) {
+			  var err8 = "ERR table7_data-api_3 -> Request failed: " + textStatus;            
+			  console.log( err8 );
+			  alert(err8);
+			}); 
+		}
+		else
+		{
+		
+		}
+        }
+    }
+
+
+
+    $(function() {
+        $.contextMenu({
+            selector: '.context-menu-one', 
+            trigger: 'left',
+            build: function($trigger, e) {
+
+               var rowElem = $trigger.parents("tr").get(0)
+               var rowID = table7.row(rowElem)[0][0];
+               var treeID =  table7.rows(rowID).data()[0][0];
+               return {
+                  callback: function(key, opt, rootMenu, originalEvent) { 
+			
+                       fnmenu[key](treeID,rowID)
+                  
+                  },
+                  items: {
+
+                      "delete": {name: "Delete", icon: "fa-minus-circle"}
+
+                  }
+               }
+            }
+        });
+
+        $('.context-menu-one').on('click', function(e){
+            //console.log('clicked', this);
+        })    
+    });
+

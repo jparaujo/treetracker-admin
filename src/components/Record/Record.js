@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Button} from 'reactstrap';
 import moment from 'moment';
 
 class Record extends Component {
@@ -18,6 +19,7 @@ class Record extends Component {
 
   render() {
     return (
+      
       <tr>
         <td>{this.props.record.id}</td>
         <td>{(this.props.record.time_created === null) ? 'None' : moment(this.props.record.time_created).format('YYYY-MM-DD hh:mm a')}</td>
@@ -27,7 +29,7 @@ class Record extends Component {
         <td>{this.props.record.lat}</td>
         <td>{this.props.record.dead}</td>
         <td>
-          Actions
+           <Button color="primary" className="context-menu-one">Actions</Button>
         </td>
       </tr>
     )
