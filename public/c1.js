@@ -61,8 +61,8 @@
 
           var data7j = JSON.stringify(data7);
 
-          console.log("data7j");
-          console.log(data7j);
+          //console.log("data7j");
+          //console.log(data7j);
 
             
 	    var request = $.ajax({
