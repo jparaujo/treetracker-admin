@@ -19,9 +19,12 @@ class Record extends Component {
   render() {
     return (
       <tr>
+        <td>{this.props.record.id}</td>
         <td>{(this.props.record.time_created === null) ? 'None' : moment(this.props.record.time_created).format('YYYY-MM-DD hh:mm a')}</td>
         <td>{(this.props.record.time_updated === null) ? 'None' : moment(this.props.record.time_updated).format('YYYY-MM-DD hh:mm a')}</td>
-        <td>{this.props.record.lon}, {this.props.record.lat}</td>
+        <td>{this.props.record.priority ? this.props.record.priority.toString() : this.props.record.priority }</td>
+        <td>{this.props.record.lon}</td>
+        <td>{this.props.record.lat}</td>
         <td>{this.props.record.dead}</td>
         <td>
           Actions
