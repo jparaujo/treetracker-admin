@@ -24,6 +24,7 @@ class Record extends Component {
         <td>{this.props.record.id}</td>
         <td>{(this.props.record.time_created === null) ? 'None' : moment(this.props.record.time_created).format('YYYY-MM-DD hh:mm a')}</td>
         <td>{(this.props.record.time_updated === null) ? 'None' : moment(this.props.record.time_updated).format('YYYY-MM-DD hh:mm a')}</td>
+        <td>{this.props.record.user_id}</td>
         <td>{this.props.record.priority ? this.props.record.priority.toString() : this.props.record.priority }</td>
         <td>{this.props.record.lon}</td>
         <td>{this.props.record.lat}</td>

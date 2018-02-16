@@ -100,7 +100,7 @@
     table7.MakeCellsEditable({
         "onUpdate": table7cb,
         "inputCss":'',
-        "columns": [3,4,5,6],
+        "columns": [4,5,6,7],
         "allowNulls": {
         },
         "confirmationButton": { 
@@ -111,7 +111,7 @@
                 [
 
                    {
-                      "column":3, 
+                      "column":4, 
                       "type": "list",
                       "options":
                        [
@@ -120,19 +120,19 @@
                        ]
                    },
                    {
-				"column":4, 
+				"column":5, 
 				"type":"number",
                                 "step":"0.000000001", 
 				"options":null 
                    }, 
                    {
-				"column":5, 
+				"column":6, 
 				"type":"number", 
                                 "step":"0.000000001", 
 				"options":null 
                    }, 
                    {
-				"column":6, 
+				"column":7, 
 				"type":"number", 
 				"options":null 
                    }
