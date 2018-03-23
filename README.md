@@ -1,5 +1,7 @@
 # Greenstand Treetracker Admin Panel
 
+## For More information on [users, design intent and goals see wiki](https://github.com/Greenstand/treetracker-admin/wiki)
+
 ## Requirements
 
 - Install Node
