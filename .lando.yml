@@ -1,0 +1,24 @@
+name: treetracker-admin
+proxy:
+  appserver:
+    - treetracker-admin.lndo.site
+config:
+  webroot: .
+services:
+  appserver:
+    type: nginx:1.12
+    ssl: true
+    config:
+      server: config/server.config
+  api:
+    type: node:8
+    ssl: true
+    command: npm start
+    build:
+      - "mkdir /var/www/treetracker-api"
+      - "chmod -R 755 /var/www/treetracker-api"
+      - "npm install --prefix /var/www/treetracker-api treetracker-api"
+    overrides:
+      services:
+        environment:
+          NODE_PORT: 3001
