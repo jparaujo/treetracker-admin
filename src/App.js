@@ -21,8 +21,8 @@ class App extends Component {
 	var head = document.getElementsByTagName('head')[0];
 	(function() {
 		var css = [
-			'/css/font-awesome.min.css',
-                        '/css/jquery.contextMenu.min.css'
+			'css/font-awesome.min.css',
+      'css/jquery.contextMenu.min.css'
 		],
 		i = 0,
 		link = document.createElement('link'),
@@ -39,21 +39,21 @@ class App extends Component {
 
         const script1 = document.createElement("script");
 
-        script1.src = "/datatables.min.js";
+        script1.src = "js/datatables.min.js";
         script1.async = false;
 
         document.body.appendChild(script1);
 
         const script1b = document.createElement("script");
 
-        script1b.src = "/jQuery.contextmenu.js";
+        script1b.src = "js/jQuery.contextmenu.js";
         script1b.async = false;
 
         document.body.appendChild(script1b);
 
         const script1c = document.createElement("script");
 
-        script1c.src = "/jquery.ui.position.js";
+        script1c.src = "js/jquery.ui.position.js";
         script1c.async = false;
 
         document.body.appendChild(script1c);
