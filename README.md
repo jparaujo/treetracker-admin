@@ -16,13 +16,24 @@
 
 ## Commands
 
-To run local web server on `http://localhost:3000/`
+To run local web server on `http://localhost:3000/`.  This runs using a remote version of the admin api hosted on dev.treetracker.org
 
 ```
 npm run start
 ```
 
-To run a build of the codebase
+To run both the admin api and the admin panel localy, with the admin panel still in development mode (not as optimized html), requires a more complex setup.
+
+1. Install nginx
+2. Use the nginx.conf file found in scripts/nginx.local.development.conf
+3. Install the treetracker-admin-api repository
+4. Launch treetracker-admin-api on port 3002 (export NODE_PORT=3002)
+5. Launch the admin panel on port port 3003
+6. Bring up the admin panel at http://localhost/admin/
+7. Help improve the documentation of this process
+
+
+To run a build of the codebase, packing it as optimized html
 
 ```
 npm run build

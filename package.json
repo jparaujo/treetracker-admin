@@ -12,7 +12,7 @@
     "reactstrap": "^5.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "source scripts/run-local-with-remote-api.sh",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
