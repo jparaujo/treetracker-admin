@@ -57,13 +57,18 @@ class App extends Component {
         script1c.async = false;
 
         document.body.appendChild(script1c);
-        //created 1-27-2018 iremaka (end)
+
+
+        const scriptConfig = document.createElement("script");
+
+        scriptConfig.src = "js/config.js";
+        scriptConfig.async = false;
+
+        document.body.appendChild(scriptConfig);
 
 
 
-
-
-    fetch('/api/trees', { method: 'GET'})
+    fetch(apiBaseUrl + 'trees', { method: 'GET'})
       .then(response => {
         console.log('Status ---', response.ok);
         console.log('response.json() ---', response);
