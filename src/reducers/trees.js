@@ -19,8 +19,8 @@ export function trees (state = {}, action) {
     case RECEIVE_TREES:
       const byId = {}
       const allIds = []
+      // @Todo: update treesByPage in addition so we ca do a little cachig when appropriate
       Object.entries(action.data).forEach(function(item) {
-        console.log(item)
         const obj = item[1]
         byId[obj.id] = item[1]
         allIds.push(obj.id)

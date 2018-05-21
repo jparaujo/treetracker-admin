@@ -1,12 +1,12 @@
 import 'react-select/dist/react-select.css'
 
 import React, { Component } from 'react'
-import ReactTable from "react-table"
-import "react-table/react-table.css"
+import ReactTable from 'react-table'
+import 'react-table/react-table.css'
 
 class TreeTable extends Component {
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     const defaultPageSize = this.props.trees.recordsPerPage
     const pages = this.props.trees.treeTotal / defaultPageSize
     const loading = this.props.trees.isFetching
@@ -32,7 +32,7 @@ class TreeTable extends Component {
         loading={loading} // Display the loading overlay when we need it
         filterable
         defaultPageSize={10}
-        className="-striped -highlight"
+        className='-striped -highlight'
         />    );
   }
 }
