@@ -1,1 +1,1 @@
-export const API_ROOT = 'http://treepaneladminapi.azurewebsites.net/api/';
+export const API_ROOT = 'http://dev.treetracker.org/api/admin';
