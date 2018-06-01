@@ -29,7 +29,7 @@ export const initialState = {
     fetchedPageCount: 0,
     currentIndex: 0,
     currentPage: 0,
-    recordsPerPage: 50,
+    recordsPerPage: 10,
     nextPageUrl: '#next',
     prevPageUrl: '#prev',
     byId: {
