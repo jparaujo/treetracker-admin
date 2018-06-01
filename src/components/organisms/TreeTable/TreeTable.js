@@ -5,11 +5,21 @@ import ReactTable from 'react-table'
 import 'react-table/react-table.css'
 
 class TreeTable extends Component {
+  constructor() {
+    super();
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(state, instance) {
+    this.props.onFetchData(state.page, state.pageSize)
+  }
+
   render() {
-    // console.log(this.props)
     const defaultPageSize = this.props.trees.recordsPerPage
-    const pages = this.props.trees.treeTotal / defaultPageSize
+    const pages = Math.floor(this.props.trees.treeTotal / defaultPageSize)
     const loading = this.props.trees.isFetching
+
     return (
       <ReactTable
         columns={[
@@ -33,7 +43,8 @@ class TreeTable extends Component {
         filterable
         defaultPageSize={10}
         className='-striped -highlight'
-        />    );
+        onFetchData={this.handleChange}
+      />);
   }
 }
 
