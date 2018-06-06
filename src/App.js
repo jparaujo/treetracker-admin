@@ -8,7 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TablePagination from '@material-ui/core/TablePagination';
 import Paper from '@material-ui/core/Paper';
-
+import dateFormat from 'dateformat';
 class App extends Component {
 
   constructor(props) {
@@ -27,6 +27,9 @@ class App extends Component {
           <TableHead>
             <TableRow>
               <TableCell>ID</TableCell>
+              <TableCell>Creation</TableCell>
+              <TableCell>Last update</TableCell>
+              <TableCell>Location</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -34,6 +37,9 @@ class App extends Component {
               return (
                 <TableRow key={tree.id}>
                   <TableCell>{tree.id}</TableCell>
+                  <TableCell>{dateFormat(tree.timeCreated, 'mmm dd, yyyy h:MM TT')}</TableCell>
+                  <TableCell>{dateFormat(tree.timeUpdated, 'mmm dd, yyyy h:MM TT')}</TableCell>
+                  <TableCell></TableCell>
                 </TableRow>
               );
             })}

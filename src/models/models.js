@@ -4,6 +4,7 @@ import { dispatch } from '@rematch/core'
 export const trees = {
     state: {
         data: [],
+        selected: [],
         page: 0,
         rowsPerPage: 10
     },
@@ -15,7 +16,7 @@ export const trees = {
     },
     effects: {
         async getTreesAsync({ page, rowsPerPage }) {
-            Axios.get(`http://dev.treetracker.org/api/admin/trees?filter[limit]=${rowsPerPage}&filter[skip]=${page * rowsPerPage}&filter[fields][id]=true`)
+            Axios.get(`http://dev.treetracker.org/api/admin/trees?filter[limit]=${rowsPerPage}&filter[skip]=${page * rowsPerPage}&filter[fields][id]=true&filter[fields][timeCreated]=true&filter[fields][timeUpdated]=true`)
                 .then((response) => {
                     this.get(response.data, { page: page, rowsPerPage: rowsPerPage });
                 });
