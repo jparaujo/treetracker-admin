@@ -1,37 +1,37 @@
+import { API_ROOT } from '../paths.js'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 /*
- * Actions
+ * Components
  */
-
-import { fetchTreesIfNeeded, fetchTreeTotal } from '../actions/trees/requestTrees'
-
-/*
- * Containers
- */
-
-import VisibleTrees from '../containers/VisibleTrees'
+import AppFrame from '../components/organisms/AppFrame/AppFrame'
 
 class App extends Component {
 
   componentDidMount() {
-    console.log('2')
     // in the future we want to maybe restore the users last filter set from the server
-    this.props.dispatch(fetchTreeTotal())
-    this.props.dispatch(fetchTreesIfNeeded(this.props.trees.currentIndex, this.props.trees.recordsPerPage))
+    async function initializeApp() {
+      const response = await fetch(`${API_ROOT}/Trees/count`)
+      const data = await response.json()
+      console.log(data)
+    }
+    initializeApp()
   }
 
   render() {
-    console.log('!')
     return(
-      <VisibleTrees/>
+      <AppFrame />
     )
   }
 }
 
-const mapStateToProps = function(state) {
+const mapState = state => {
   return state
 }
 
-export default connect(mapStateToProps)(App)
+const mapDispatch = dispatch => ({
+  requestTreeCount: id => dispatch.trees.requestTreeCount(),
+  requestTrees: id => dispatch.trees.requestTrees()
+})
+export default connect(mapState, mapDispatch)(App)
