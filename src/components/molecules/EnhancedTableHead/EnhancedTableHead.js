@@ -37,7 +37,7 @@ const EnhancedTableHead = (props) => {
   }
 
   const handleSort = (order, orderBy) => {
-    this.props.sortTrees(order, orderBy)
+    props.sortTrees(order, orderBy)
   }
 
   const numSelected = props.selected.length
