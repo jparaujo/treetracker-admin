@@ -15,84 +15,82 @@ const styles = theme => ({
     backgroundColor: "#fff",
     position: "sticky",
     top: 0
+  },
+  locationCol: {
+    minWidth: '200px'
   }
 });
 
-class EnhancedTableHead extends React.Component {
+const EnhancedTableHead = (props) => {
 
+  const { page, rowsPerPage, order, orderBy, rowCount, classes } = props
 
-  render() {
+  const columnData = [
+    { id: 'id', label: 'Id', sortable: true },
+    { id: 'timeCreated', label: 'Creation', sortable: true },
+    { id: 'timeUpdated', label: 'Updated', sortable: true },
+    { id: 'Location', label: 'Location' }
+  ]
 
-    const { page, rowsPerPage, order, orderBy, rowCount, classes } = this.props
-    const columnData = [
-      { id: 'id', label: 'Id', sortable: true },
-      { id: 'timeCreated', label: 'Creation', sortable: true },
-      { id: 'timeUpdated', label: 'Updated', sortable: true },
-      { id: 'Location', label: 'Location' }
-    ]
-
-
-    const handleSelectAll = () => {
-      console.log('handleSelectAll')
-    }
-
-    const handleSort = (order, orderBy) => {
-      this.props.sortTrees(order, orderBy)
-    }
-
-    const numSelected = this.props.selected.length
-    console.log('rendering tablehead', order)
-    return (
-
-      <TableHead>
-        <TableRow>
-          <TableCell padding="checkbox" position={"sticky"} top={0}>
-            <Checkbox
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={numSelected === rowCount}
-              onChange={handleSelectAll}
-            />
-          </TableCell>
-          {columnData.map(column => {
-            if( column.sortable ) {
-              return (
-                <TableCell
-                  key={column.id}
-                  numeric={column.numeric}
-                  padding={column.disablePadding ? 'none' : 'default'}
-                  sortDirection={orderBy === column.id ? order : false}
-                  className={classes.head}
-                >
-                  <Tooltip
-                    title="Sort"
-                    placement={column.numeric ? 'bottom-end' : 'bottom-start'}
-                    enterDelay={250}
-                  >
-                    <TableSortLabel
-                      active={orderBy === column.id}
-                      direction={order}
-                      onClick={function(e){ handleSort(order, column.id) }}
-                    >
-                      {column.label}
-                    </TableSortLabel>
-                  </Tooltip>
-                </TableCell>
-              )
-            } else {
-              return (
-                <TableCell
-                  key={column.id}
-                className={classes.head}
-                >
-                  {column.label}
-                </TableCell>
-              )
-            }
-          }, this)}
-        </TableRow>
-      </TableHead>
-    )
+  const handleSelectAll = () => {
+    console.log('handleSelectAll')
   }
+
+  const handleSort = (order, orderBy) => {
+    this.props.sortTrees(order, orderBy)
+  }
+
+  const numSelected = props.selected.length
+
+  return (
+    <TableHead>
+      <TableRow>
+        <TableCell padding="checkbox" className={classes.head}>
+          <Checkbox
+            indeterminate={numSelected > 0 && numSelected < rowCount}
+            checked={numSelected === rowCount}
+            onChange={handleSelectAll}
+          />
+        </TableCell>
+        {columnData.map(column => {
+          if( column.sortable ) {
+            return (
+              <TableCell
+                key={column.id}
+                numeric={column.numeric}
+                padding={column.disablePadding ? 'none' : 'default'}
+                sortDirection={orderBy === column.id ? order : false}
+                className={classes.head}
+              >
+                <Tooltip
+                  title="Sort"
+                  placement={column.numeric ? 'bottom-end' : 'bottom-start'}
+                  enterDelay={250}
+                >
+                  <TableSortLabel
+                    active={orderBy === column.id}
+                    direction={order}
+                    onClick={function(e){ handleSort(order, column.id) }}
+                  >
+                    {column.label}
+                  </TableSortLabel>
+                </Tooltip>
+              </TableCell>
+            )
+          } else {
+            return (
+              <TableCell
+                key={column.id}
+                className={classes.head}
+              >
+                {column.label}
+              </TableCell>
+            )
+          }
+        })}
+      </TableRow>
+    </TableHead>
+  )
 }
 
 const mapState = state => {
