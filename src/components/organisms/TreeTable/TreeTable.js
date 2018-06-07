@@ -17,7 +17,7 @@ import EnhancedTableHead from '../../molecules/EnhancedTableHead/EnhancedTableHe
 
 const styles = theme => ({
   root: {
-    marginLeft: '100px',
+    marginLeft: '80px',
     marginTop: theme.spacing.unit * 3,
     overflowX: 'auto'
   },
@@ -75,7 +75,7 @@ class TreeTable extends Component {
           <TableBody>
             {this.props.treesArray.map(tree => {
               const isSelected = this.isSelected(tree.id)
-              const location = byId[tree.id] ? byId[tree.id].location : false
+              const location = true //byId[tree.id] ? byId[tree.id].location : false
               // this probably belongs elsewhere…
               const city = ( location && location.city !== undefined )? `${location.city},` : ''
               const country = ( location && location.country !== undefined )? `${location.country}` : ''
