@@ -1,22 +1,18 @@
-import { API_ROOT } from '../paths.js'
+import { API_ROOT } from './paths.js'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 /*
  * Components
  */
-import AppFrame from '../components/organisms/AppFrame/AppFrame'
+import AppFrame from './components/organisms/AppFrame/AppFrame'
 
 class App extends Component {
 
   componentDidMount() {
     // in the future we want to maybe restore the users last filter set from the server
-    async function initializeApp() {
-      const response = await fetch(`${API_ROOT}/Trees/count`)
-      const data = await response.json()
-      console.log(data)
-    }
-    initializeApp()
+    // as well as deal with all the login state stuff.
+    this.props.requestTreeCount()
   }
 
   render() {

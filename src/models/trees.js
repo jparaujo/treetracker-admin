@@ -41,6 +41,12 @@ const trees = {
         this.getTrees(response.data, { page: page, rowsPerPage: rowsPerPage, orderBy: orderBy, order: order });
       });
     },
+    async requestTreeCount(payload, rootState) {
+      const response = await fetch(`${API_ROOT}/Trees/count`)
+      const data = await response.json()
+      console.log(data)
+      return { ...rootState, data }
+    },
     async getLocationName(payload, rootState) {
       console.log('getLocationName', payload)
       if( (rootState.trees.byId[payload.id] &&
