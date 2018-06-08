@@ -89,16 +89,16 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    paddingTop: '80px',
-    paddingLeft: '80px',
+    paddingTop: theme.spacing.unit * 7,
+    paddingLeft: theme.spacing.unit * 8,
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
+  },
+  tableToolbar: {
+    position: 'fixed',
+    bottom: 0,
+    left: 0
   }
-  // 'MuiTablePagination-root-120': {
-  //   position: 'fixed',
-  //   bottom: 0,
-  //   left: 0
-  // }
 });
 
 const AppFrame = (props) => ({
@@ -139,7 +139,6 @@ const AppFrame = (props) => ({
           </div>
         </Drawer>
         <main className={classes.content}>
-          <TableToolbar />
           <TreeTable />
         </main>
       </div>

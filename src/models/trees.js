@@ -8,7 +8,7 @@ const trees = {
     selected: [],
     numSelected: 0,
     page: 0,
-    rowsPerPage: 10,
+    rowsPerPage: 40,
     order: 'asc',
     orderBy: 'id',
     allIds: [],
