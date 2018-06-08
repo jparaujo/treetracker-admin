@@ -15,8 +15,9 @@ import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import TableToolbar from '../../molecules/TableToolbar/TableToolbar'
-import TreeTable from '../TreeTable/TreeTable'
-/* @Todo: move to some configurationn file */
+import TreeTable from '../../organisms/TreeTable/TreeTable'
+
+/* @Todo: move to some configuration file */
 const drawerWidth = 240
 
 const styles = theme => ({
@@ -27,19 +28,19 @@ const styles = theme => ({
     overflow: 'auto',
     position: 'relative',
     display: 'flex',
+    padding: 0,
+    margin: 0
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     position: 'fixed',
     top: 0,
     left: 0,
+    backgroundColor: '#517147',
     transition: theme.transitions.create(['width', 'margin'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-  },
-  toolBar: {
-    backgroundColor: '#222'
   },
   appBarShift: {
     marginLeft: drawerWidth,
@@ -60,7 +61,6 @@ const styles = theme => ({
     position: 'fixed',
     top: 0,
     left: 0,
-    // position: 'relative',
     whiteSpace: 'nowrap',
     width: drawerWidth,
     transition: theme.transitions.create('width', {
@@ -85,15 +85,20 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'flex-end',
     padding: '0 8px',
+    backgroundColor: '#eee',
     ...theme.mixins.toolbar,
   },
   content: {
     flexGrow: 1,
     padding: 0,
     margin: 0,
-    paddingTop: theme.spacing.unit * 7,
-    paddingLeft: theme.spacing.unit * 8,
+    paddingTop: theme.spacing.unit * 8,
+    paddingLeft: theme.spacing.unit * 8.25,
     backgroundColor: theme.palette.background.default,
+  },
+  title: {
+    fontFamily: 'Cabin Sketch',
+    fontSize: '1.75em'
   },
   tableToolbar: {
     position: 'fixed',
@@ -110,18 +115,18 @@ const AppFrame = (props) => ({
       <div className={classes.root}>
         <AppBar
           position="fixed"
-          className={classNames(classes.appBar, state.appFrame.drawer.open && classes.appBarShift)}
+          className={classNames(classes.appBar, state.appFrame.appDrawer.open && classes.appBarShift)}
         >
-          <Toolbar disableGutters={!state.appFrame.drawer.open}>
+          <Toolbar disableGutters={!state.appFrame.appDrawer.open}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
               onClick={toggleAppDrawer()}
-              className={classNames(classes.menuButton, state.appFrame.drawer.open && classes.hide)}
+              className={classNames(classes.menuButton, state.appFrame.appDrawer.open && classes.hide)}
             >
               <MenuIcon />
             </IconButton>
-            <Typography variant="title" color="inherit" noWrap>
+            <Typography className={classes.title} variant="title" color="inherit" noWrap>
               TreeTracker Admin
             </Typography>
           </Toolbar>
@@ -129,9 +134,9 @@ const AppFrame = (props) => ({
         <Drawer
           variant="permanent"
           classes={{
-            paper: classNames(classes.drawerPaper, !state.appFrame.drawer.open && classes.drawerPaperClose),
+            paper: classNames(classes.drawerPaper, !state.appFrame.appDrawer.open && classes.drawerPaperClose),
           }}
-          open={state.appFrame.drawer.open}
+          open={state.appFrame.appDrawer.open}
         >
           <div className={classes.toolbar}>
             <IconButton onClick={closeAppDrawer()}>
@@ -140,6 +145,7 @@ const AppFrame = (props) => ({
           </div>
         </Drawer>
         <main className={classes.content}>
+          <TableToolbar />
           <TreeTable />
         </main>
       </div>

@@ -2,19 +2,31 @@ import { dispatch } from '@rematch/core'
 
 const appFrame = {
   state: {
-    drawer: {
+    appDrawer: {
       'open': false
+    },
+    displayDrawer: {
+      'open': false 
     }
   },
   reducers: {
     toggleAppDrawer(state) {
-      return { drawer: { open: !state.open }}
+      return { appDrawer: { open: !state.open }}
     },
     openAppDrawer(state) {
-      return { drawer: { open: true }}
+      return { appDrawer: { open: true }}
     },
     closeAppDrawer(state) {
-      return { drawer: { open: false }}
+      return { appDrawer: { open: false }}
+    },
+    toggleDisplayDrawer(state) {
+      return { displayDrawer: { open: !state.open }}
+    },
+    openDisplayDrawer(state) {
+      return { displayDrawer: { open: true }}
+    },
+    closeDisplayDrawer(state) {
+      return { displayDrawer: { open: false }}
     }
   }
 }

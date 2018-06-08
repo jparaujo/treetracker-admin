@@ -12,10 +12,10 @@ import TableRow from '@material-ui/core/TableRow'
 
 const styles = theme => ({
   head: {
-    backgroundColor: '#fff',
+    backgroundColor: '#eee',
     position: 'sticky',
-    top: theme.spacing.unit * 7,
-    boxShadow: '0 2px 5px rgba(0,0,0,0.15)',
+    top: theme.spacing.unit * 19,
+    boxShadow: '12px 0px 12px -2px rgba(0,0,0,0.2)',
     zIndex: 100
   },
   locationCol: {
@@ -36,6 +36,7 @@ const EnhancedTableHead = (props) => {
 
   const handleSelectAll = () => {
     console.log('handleSelectAll')
+
   }
 
   const handleSort = (order, orderBy) => {

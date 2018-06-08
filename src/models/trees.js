@@ -21,6 +21,9 @@ const trees = {
     getTrees(state, payload, { page, rowsPerPage, order, orderBy }) {
       return { ...state, data: payload, page: page, rowsPerPage: rowsPerPage, order: order, orderBy: orderBy };
     },
+    receiveTreeCount(state, payload) {
+      return { ...state, treeCount: payload.count }
+    },
     receiveLocation(state, payload, { id, address }) {
       console.log( 'receiveLocation.id', id, address, state)
       if(address === 'cached') {
@@ -39,13 +42,15 @@ const trees = {
       Axios.get(query)
       .then((response) => {
         this.getTrees(response.data, { page: page, rowsPerPage: rowsPerPage, orderBy: orderBy, order: order });
-      });
+      })
     },
     async requestTreeCount(payload, rootState) {
-      const response = await fetch(`${API_ROOT}/Trees/count`)
-      const data = await response.json()
-      console.log(data)
-      return { ...rootState, data }
+      Axios.get(`${API_ROOT}/Trees/count`)
+      .then((response) => {
+        const data = response.data
+        console.log(data)
+        this.receiveTreeCount(data)
+      })
     },
     async getLocationName(payload, rootState) {
       console.log('getLocationName', payload)

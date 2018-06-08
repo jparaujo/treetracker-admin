@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 /*
  * Components
  */
-import AppFrame from './components/organisms/AppFrame/AppFrame'
+import AppFrame from './components/environments/AppFrame/AppFrame'
 
 class App extends Component {
 
