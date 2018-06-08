@@ -12,9 +12,11 @@ import TableRow from '@material-ui/core/TableRow'
 
 const styles = theme => ({
   head: {
-    backgroundColor: "#fff",
-    position: "sticky",
-    top: 0
+    backgroundColor: '#fff',
+    position: 'sticky',
+    top: theme.spacing.unit * 7,
+    boxShadow: '0 2px 5px rgba(0,0,0,0.15)',
+    zIndex: 100
   },
   locationCol: {
     minWidth: '200px'
@@ -56,11 +58,11 @@ const EnhancedTableHead = (props) => {
           if( column.sortable ) {
             return (
               <TableCell
+                className={classes.head}
                 key={column.id}
                 numeric={column.numeric}
                 padding={column.disablePadding ? 'none' : 'default'}
                 sortDirection={orderBy === column.id ? order : false}
-                className={classes.head}
               >
                 <Tooltip
                   title="Sort"
@@ -80,8 +82,8 @@ const EnhancedTableHead = (props) => {
           } else {
             return (
               <TableCell
-                key={column.id}
                 className={classes.head}
+                key={column.id}
               >
                 {column.label}
               </TableCell>

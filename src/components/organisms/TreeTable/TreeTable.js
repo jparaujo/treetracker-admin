@@ -17,12 +17,19 @@ import EnhancedTableHead from '../../molecules/EnhancedTableHead/EnhancedTableHe
 
 const styles = theme => ({
   root: {
-    marginLeft: '80px',
+    paddingLeft: '70px',
     marginTop: theme.spacing.unit * 3,
     overflowX: 'auto'
   },
   locationCol: {
     width: '270px'
+  },
+  pagination: {
+    position: 'sticky',
+    bottom: '0px',
+    width: '100%',
+    backgroundColor: '#fff',
+    boxShadow: '0 -2px 5px rgba(0,0,0,0.15)'
   }
 })
 
@@ -103,6 +110,7 @@ class TreeTable extends Component {
           </TableBody>
         </Table>
         <TablePagination
+          className={classes.pagination}
           component="div"
           count={200}
           rowsPerPage={rowsPerPage}

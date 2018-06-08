@@ -5,6 +5,8 @@ import App from './App'
 import 'typeface-roboto'
 import { init } from "@rematch/core";
 import * as models from "./models"
+import './index.css'
+
 const store = init({models})
 
 ReactDOM.render(
