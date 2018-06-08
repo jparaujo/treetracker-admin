@@ -15,14 +15,19 @@ import Tooltip from '@material-ui/core/Tooltip'
 
 import EnhancedTableHead from '../../molecules/EnhancedTableHead/EnhancedTableHead'
 
+// change 88 to unit spacing,
 const styles = theme => ({
   root: {
+    position: 'relative',
+    top: '88px',
     paddingLeft: '70px',
-    marginTop: theme.spacing.unit * 3,
     overflowX: 'auto'
   },
   locationCol: {
     width: '270px'
+  },
+  table: {
+    minHeight: '100vh'
   },
   pagination: {
     position: 'sticky',
@@ -63,7 +68,7 @@ class TreeTable extends Component {
   }
 
   render() {
-    const { numSelected, classes, rowsPerPage, selected, order, orderBy, treesArray, getLocationName, byId } = this.props
+    const { numSelected, classes, rowsPerPage, selected, order, orderBy, treesArray, getLocationName, treeCount, byId } = this.props
     return (
       <Paper >
         <Table>
@@ -112,8 +117,9 @@ class TreeTable extends Component {
         <TablePagination
           className={classes.pagination}
           component="div"
-          count={200}
+          count={treeCount/rowsPerPage}
           rowsPerPage={rowsPerPage}
+          rowsPerPageOptions={[25, 50, 75, 100, 250, 500]}
           page={this.props.page}
           backIconButtonProps={{
             'aria-label': 'Previous Page',

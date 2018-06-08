@@ -61,11 +61,13 @@ TableToolbar.propTypes = {
 const styles = theme => ({
   root: {
     width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    paddingTop: theme.spacing.unit * 3,
+    position: 'fixed',
+    top: '64px',
+    backgroundColor: '#dedede',
+    zIndex: 102
   },
-  table: {
-    minWidth: 1020,
-  },
+
   tableWrapper: {
     overflowX: 'auto',
   }
