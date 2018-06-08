@@ -26,7 +26,10 @@ const styles = theme => ({
   },
   pagination: {
     position: 'sticky',
-    bottom: '0px'
+    bottom: '0px',
+    width: '100%',
+    backgroundColor: '#fff',
+    boxShadow: '0 -2px 5px rgba(0,0,0,0.15)'
   }
 })
 
@@ -107,7 +110,7 @@ class TreeTable extends Component {
           </TableBody>
         </Table>
         <TablePagination
-          classNames={classes.pagination}
+          className={classes.pagination}
           component="div"
           count={200}
           rowsPerPage={rowsPerPage}

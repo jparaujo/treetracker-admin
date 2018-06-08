@@ -89,10 +89,11 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
+    padding: 0,
+    margin: 0,
     paddingTop: theme.spacing.unit * 7,
     paddingLeft: theme.spacing.unit * 8,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
   },
   tableToolbar: {
     position: 'fixed',

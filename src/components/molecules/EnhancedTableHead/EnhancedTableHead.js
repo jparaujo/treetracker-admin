@@ -15,7 +15,8 @@ const styles = theme => ({
     backgroundColor: '#fff',
     position: 'sticky',
     top: theme.spacing.unit * 7,
-    boxShadow: '2px 2px 5px rgba(0,0,0,.3)'
+    boxShadow: '0 2px 5px rgba(0,0,0,0.15)',
+    zIndex: 100
   },
   locationCol: {
     minWidth: '200px'
