@@ -13,7 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 
 import AppDrawer from '../../molecules/AppDrawer/AppDrawer'
 import Trees from '../../biomes/Trees/Trees'
-import PictureScrubber from '../../biomes/PictureScrubber/PictureScrubber'
+import ImageScrubber from '../../biomes/ImageScrubber/ImageScrubber'
 
 import { drawerWidth } from '../../../common/variables'
 
@@ -88,15 +88,15 @@ const AppFrame = (props) => ({
 
   render() {
     const { classes, theme, toggleAppDrawer, closeAppDrawer, appDrawer, currentView } = this.props
-    console.log('| AppFrame | render | currentView » |', currentView)
+    // console.log('| AppFrame | render | currentView » |', currentView)
     let tabContents
     if(currentView === 'trees') {
       tabContents = (
         <Trees />
       )
-    } else if(currentView === 'pictureScrubber') {
+    } else if(currentView === 'imageScrubber') {
       tabContents = (
-        <PictureScrubber />
+        <ImageScrubber />
       )
     }
     return (
@@ -120,7 +120,7 @@ const AppFrame = (props) => ({
           </Toolbar>
         </AppBar>
         <AppDrawer />
-        <main className={classes.content}>
+        <main className={classNames(classes.content, currentView)}>
           {tabContents}
         </main>
       </div>

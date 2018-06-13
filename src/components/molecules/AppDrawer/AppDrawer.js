@@ -9,15 +9,10 @@ import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
-
 import IconButton from '@material-ui/core/IconButton'
-
-import { ImageSearch, Nature } from 'mdi-material-ui'
-
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-
+import Icon from '../../atoms/Icon/Icon'
 import { drawerWidth } from '../../../common/variables'
 
 const styles = theme => ({
@@ -35,6 +30,10 @@ const styles = theme => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
+  listItem: {
+    paddingLeft: theme.spacing.unit * 1.5,
+    paddingRight: 0
+  },
   drawerPaperClose: {
     overflowX: 'hidden',
     transition: theme.transitions.create('width', {
@@ -51,13 +50,13 @@ const styles = theme => ({
 const navItems = [
     {
       label: 'Trees',
-      icon: 'Nature',
-      id: 'trees'
+      id: 'trees',
+      icon: 'TREE'
     },
     {
       label: 'Images',
-      icon: 'ImageSearch',
-      id: 'imageScrubber'
+      id: 'imageScrubber',
+      icon: 'IMAGE_SEARCH'
     }
 ]
 
@@ -75,7 +74,7 @@ class AppDrawer extends Component {
 
   render() {
     const { isOpen, changeCurrentView, closeAppDrawer, currentView, classes, theme } = this.props
-    console.log("| Appdrawer | render | currentView  » |", currentView )
+    // console.log("| Appdrawer | render | currentView  » |", currentView )
     return(
       <Drawer
         variant="permanent"
@@ -92,17 +91,14 @@ class AppDrawer extends Component {
         <List>
           {navItems.map(item => {
             return (
-              <ListItem key={item.id} button onClick={
+              <ListItem className={(!isOpen) ? classes.listItem : ''} key={item.id} button onClick={
                 function(e) {
-                  console.log('navItemClicked »»', item)
+                  // console.log('navItemClicked »»', item.id)
                   changeCurrentView(item.id)
                 }
               }>
                 {isOpen && <ListItemText primary={item.label} />}
-                <ListItemIcon>
-                {/* gotta make the icons dynamic, probably by creating a NavIcon component */}
-                  <Nature />
-                </ListItemIcon>
+                <Icon icon={item.icon} />
               </ListItem>
             )})
           }

@@ -8,11 +8,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
-const PictureScrubber = (props) => ({
+const ImageScrubber = (props) => ({
 
   render() {
     return (
-      <h1>PictureScrubber!</h1>
+      <h1>Image Scrubber Will Live Here!!</h1>
     )
   }
 })
@@ -22,11 +22,10 @@ const mapState = (state) => {
 }
 
 const mapDispatch = (dispatch) => {
-  return {
-  }
+  return {}
 }
 
-PictureScrubber.propTypes = {
+ImageScrubber.propTypes = {
 }
 
-export default connect(mapState, mapDispatch)(PictureScrubber)
+export default connect(mapState, mapDispatch)(ImageScrubber)
