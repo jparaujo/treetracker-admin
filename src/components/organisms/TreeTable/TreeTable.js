@@ -8,7 +8,6 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import TablePagination from '@material-ui/core/TablePagination'
-import Paper from '@material-ui/core/Paper'
 import dateFormat from 'dateformat'
 import Checkbox from '@material-ui/core/Checkbox'
 import Tooltip from '@material-ui/core/Tooltip'
@@ -27,6 +26,9 @@ const styles = theme => ({
     width: '270px'
   },
   table: {
+    minHeight: '100vh'
+  },
+  tableBody: {
     minHeight: '100vh'
   },
   pagination: {
@@ -55,12 +57,35 @@ class TreeTable extends Component {
     this.props.getTreesAsync(payload)
   }
 
-  handleSelectAllClick = (event, checked) => {
-    if (checked) {
-      this.setState({ selected: this.state.data.map(n => n.id) })
-      return
+  handleSelection = (e) => {
+
+  }
+
+  handleClick = (event, id) => {
+    const { selected } = this.state
+    const selectedIndex = selected.indexOf(id)
+    let newSelected = []
+    if (selectedIndex === -1) {
+      newSelected = newSelected.concat(selected, id)
+    } else if (selectedIndex === 0) {
+      newSelected = newSelected.concat(selected.slice(1))
+    } else if (selectedIndex === selected.length - 1) {
+      newSelected = newSelected.concat(selected.slice(0, -1))
+    } else if (selectedIndex > 0) {
+      newSelected = newSelected.concat(
+        selected.slice(0, selectedIndex),
+        selected.slice(selectedIndex + 1),
+      )
     }
-    this.setState({ selected: [] })
+    this.setState({ selected: newSelected })
+  }
+
+  onPageChange = (event, page) => {
+    this.props.getTreesAsync({ page: page, rowsPerPage: this.props.rowsPerPage })
+  }
+
+  onChangeRowsPerPage = event => {
+    this.props.getTreesAsync({ page: this.props.page, rowsPerPage: event.target.value })
   }
 
   isSelected = (id) => {
@@ -70,8 +95,8 @@ class TreeTable extends Component {
   render() {
     const { numSelected, classes, rowsPerPage, selected, order, orderBy, treesArray, getLocationName, treeCount, byId } = this.props
     return (
-      <Paper >
-        <Table>
+      <div >
+        <Table className={classes.tableBody}>
           {/*
            State handling betweenn treetable and EnhancedTableHead are a non-reduxy right now
            We should probably fix that, but it's not a huge problem. Consistency though.
@@ -84,7 +109,7 @@ class TreeTable extends Component {
             onRequestSort={this.handleRequestSort}
             rowCount={rowsPerPage}
           />
-          <TableBody>
+          <TableBody className={classes.tableBody}>
             {this.props.treesArray.map(tree => {
               const isSelected = this.isSelected(tree.id)
               const location = true //byId[tree.id] ? byId[tree.id].location : false
@@ -94,7 +119,9 @@ class TreeTable extends Component {
 
               if(!location) getLocationName(tree.id, tree.lat, tree.lon)
               return (
-                <TableRow key={tree.id}>
+                <TableRow
+                  key={tree.id}
+                >
                   <TableCell padding="checkbox">
                     <Checkbox checked={isSelected} />
                   </TableCell>
@@ -130,14 +157,8 @@ class TreeTable extends Component {
           onChangePage={this.onPageChange}
           onChangeRowsPerPage={this.onChangeRowsPerPage}
         />
-      </Paper>
+      </div>
     )
-  }
-  onPageChange = (event, page) => {
-    this.props.getTreesAsync({ page: page, rowsPerPage: this.props.rowsPerPage })
-  }
-  onChangeRowsPerPage = event => {
-    this.props.getTreesAsync({ page: this.props.page, rowsPerPage: event.target.value })
   }
 }
 

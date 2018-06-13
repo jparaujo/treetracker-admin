@@ -2,31 +2,24 @@ import { dispatch } from '@rematch/core'
 
 const appFrame = {
   state: {
+    currentView: 'trees',
     appDrawer: {
-      'open': false
-    },
-    displayDrawer: {
-      'open': false 
+      'isOpen': false
     }
   },
   reducers: {
     toggleAppDrawer(state) {
-      return { appDrawer: { open: !state.open }}
+      return { currentView: state.currentView, appDrawer: { isOpen: !state.isOpen }}
     },
     openAppDrawer(state) {
-      return { appDrawer: { open: true }}
+      return { currentView: state.currentView, appDrawer: { isOpen: true }}
     },
     closeAppDrawer(state) {
-      return { appDrawer: { open: false }}
+      return { currentView: state.currentView, appDrawer: { isOpen: false }}
     },
-    toggleDisplayDrawer(state) {
-      return { displayDrawer: { open: !state.open }}
-    },
-    openDisplayDrawer(state) {
-      return { displayDrawer: { open: true }}
-    },
-    closeDisplayDrawer(state) {
-      return { displayDrawer: { open: false }}
+    changeCurrentView(state, payload) {
+      console.log('| reduceer | changeCurrentView | » |', payload)
+      return { currentView: payload.newView, appDrawer: { isOpen: state.isOpen } }
     }
   }
 }
