@@ -12,7 +12,11 @@ const trees = {
     order: 'asc',
     orderBy: 'id',
     allIds: [],
-    byId: {}
+    byId: {},
+    displayDrawer: {
+      'isOpen': false
+    }
+
   },
   reducers: {
     selectAll(state) {
@@ -25,7 +29,6 @@ const trees = {
       return { ...state, treeCount: payload.count }
     },
     receiveLocation(state, payload, { id, address }) {
-      console.log( 'receiveLocation.id', id, address, state)
       if(address === 'cached') {
         return state
       } else {
@@ -34,6 +37,15 @@ const trees = {
         byId[id].location = payload.address
         return { ...state, byId }
       }
+    },
+    toggleDisplayDrawer(state) {
+      return { displayDrawer: { isOpen: !state.isOpen }}
+    },
+    openDisplayDrawer(state) {
+      return { displayDrawer: { isOpen: true }}
+    },
+    closeDisplayDrawer(state) {
+      return { displayDrawer: { isOpen: false }}
     }
   },
   effects: {
@@ -48,12 +60,10 @@ const trees = {
       Axios.get(`${API_ROOT}/Trees/count`)
       .then((response) => {
         const data = response.data
-        console.log(data)
         this.receiveTreeCount(data)
       })
     },
     async getLocationName(payload, rootState) {
-      console.log('getLocationName', payload)
       if( (rootState.trees.byId[payload.id] &&
           rootState.trees.byId[payload.id].location &&
           rootState.trees.byId[payload.id].location.lat !== payload.lat &&
@@ -77,14 +87,12 @@ const trees = {
 
     },
     async sortTrees(payload, rootState) {
-      console.log('sortTrees', payload, rootState, rootState.trees.order, payload.order)
       const page = rootState.trees.page
       const rowsPerPage = rootState.trees.rowsPerPage
       const newOrder = (rootState.trees.order === 'asc') ? 'desc' : 'asc'
       const query = `${API_ROOT}/trees?filter[order]=${payload.orderBy} ${newOrder}&filter[limit]=${rowsPerPage}&filter[skip]=${page * rowsPerPage}&filter[fields][lat]=true&filter[fields][lon]=true&filter[fields][id]=true&filter[fields][timeCreated]=true&filter[fields][timeUpdated]=true`;
       Axios.get(query)
       .then((response) => {
-        console.log(response)
         this.getTrees(response.data, { page: page, rowsPerPage: rowsPerPage, orderBy: payload.orderBy, order: newOrder });
       });
     }

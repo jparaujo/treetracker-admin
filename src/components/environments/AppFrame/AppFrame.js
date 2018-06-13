@@ -1,24 +1,23 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import compose from 'recompose/compose'
 import { connect } from 'react-redux'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
-import Drawer from '@material-ui/core/Drawer'
 import Toolbar from '@material-ui/core/Toolbar'
-import List from '@material-ui/core/List'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
-import ChevronRightIcon from '@material-ui/icons/ChevronRight'
-import TableToolbar from '../../molecules/TableToolbar/TableToolbar'
-import TreeTable from '../../organisms/TreeTable/TreeTable'
 
-/* @Todo: move to some configuration file */
-const drawerWidth = 240
+import AppDrawer from '../../molecules/AppDrawer/AppDrawer'
+import Trees from '../../biomes/Trees/Trees'
+import PictureScrubber from '../../biomes/PictureScrubber/PictureScrubber'
+
+import { drawerWidth } from '../../../common/variables'
+
+
 
 const styles = theme => ({
   root: {
@@ -57,28 +56,6 @@ const styles = theme => ({
   hide: {
     display: 'none',
   },
-  drawerPaper: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    whiteSpace: 'nowrap',
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerPaperClose: {
-    overflowX: 'hidden',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    width: theme.spacing.unit * 7,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 9,
-    },
-  },
   toolbar: {
     top: '120px',
     display: 'flex',
@@ -110,19 +87,29 @@ const styles = theme => ({
 const AppFrame = (props) => ({
 
   render() {
-    const { classes, theme, toggleAppDrawer, closeAppDrawer, state } = this.props;
+    const { classes, theme, toggleAppDrawer, closeAppDrawer, appDrawer, currentView } = this.props;
+    let tabContents
+    if(currentView === 'trees') {
+      tabContents = (
+        <Trees />
+      )
+    } else if(currentView === 'pictureScrubber') {
+      tabContents = (
+        <PictureScrubber />
+      )
+    }
     return (
       <div className={classes.root}>
         <AppBar
           position="fixed"
-          className={classNames(classes.appBar, state.appFrame.appDrawer.open && classes.appBarShift)}
+          className={classNames(classes.appBar, appDrawer.isOpen && classes.appBarShift)}
         >
-          <Toolbar disableGutters={!state.appFrame.appDrawer.open}>
+          <Toolbar disableGutters={!appDrawer.isOpen}>
             <IconButton
               color="inherit"
               aria-label="open drawer"
               onClick={toggleAppDrawer()}
-              className={classNames(classes.menuButton, state.appFrame.appDrawer.open && classes.hide)}
+              className={classNames(classes.menuButton, appDrawer.isOpen && classes.hide)}
             >
               <MenuIcon />
             </IconButton>
@@ -131,36 +118,27 @@ const AppFrame = (props) => ({
             </Typography>
           </Toolbar>
         </AppBar>
-        <Drawer
-          variant="permanent"
-          classes={{
-            paper: classNames(classes.drawerPaper, !state.appFrame.appDrawer.open && classes.drawerPaperClose),
-          }}
-          open={state.appFrame.appDrawer.open}
-        >
-          <div className={classes.toolbar}>
-            <IconButton onClick={closeAppDrawer()}>
-              {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-            </IconButton>
-          </div>
-        </Drawer>
+        <AppDrawer />
         <main className={classes.content}>
-          <TableToolbar />
-          <TreeTable />
+          {tabContents}
         </main>
       </div>
-    );
+    )
   }
 })
 
-const mapState = state => {
-  return { state: state }
+const mapState = (state) => {
+  return {
+    appDrawer: state.appFrame.appDrawer,
+    currentView: state.appFrame.currentView
+  }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
     closeAppDrawer: () => dispatch.appFrame.closeAppDrawer,
     toggleAppDrawer: () => dispatch.appFrame.toggleAppDrawer,
+    changeCurrentView: ({currentView}) => dispatch.appFrame.changeCurrentView({currentView: currentView})
   }
 }
 
