@@ -4,7 +4,7 @@ PictureScrubber
 A handy tool for quickly flagging bad images
 
 */
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
@@ -12,7 +12,9 @@ const ImageScrubber = (props) => ({
 
   render() {
     return (
-      <h1>Image Scrubber Will Live Here!!</h1>
+      <div className={'imageScrubber'}>
+        <h1>Image Scrubber Will Live Here!!</h1>
+      </div>
     )
   }
 })

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 import compose from 'recompose/compose'
@@ -25,7 +25,7 @@ const styles = theme => ({
 
 const EnhancedTableHead = (props) => {
 
-  const { page, rowsPerPage, order, orderBy, rowCount, classes } = props
+  const { order, orderBy, rowCount, classes } = props
 
   const columnData = [
     { id: 'id', label: 'Id', sortable: true },

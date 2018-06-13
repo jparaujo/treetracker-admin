@@ -87,7 +87,7 @@ const styles = theme => ({
 const AppFrame = (props) => ({
 
   render() {
-    const { classes, theme, toggleAppDrawer, closeAppDrawer, appDrawer, currentView } = this.props
+    const { classes, theme, toggleAppDrawer, appDrawer, currentView } = this.props
     // console.log('| AppFrame | render | currentView » |', currentView)
     let tabContents
     if(currentView === 'trees') {

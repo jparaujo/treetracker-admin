@@ -1,21 +1,24 @@
 import React from 'react'
 import { iconPaths } from '../../../common/iconPaths'
-import IconButton from '@material-ui/core/IconButton'
+import { withStyles } from '@material-ui/core/styles'
+
+const styles = (theme) => ({
+  default: {
+    fill: '#333'
+  },
+  active: {
+    fill: '#fff'
+  }
+})
 
 const Icon = (props) => ({
 
   render() {
     return (
-      <IconButton
-        color="inherit"
-        aria-label="props.aria-label"
-      >
-        <svg width="36" height="36" viewBox="0 0 24 24">
-          <path d={iconPaths[props.icon]}></path>
+        <svg width='36' height='36' viewBox='0 0 24 24'>
+          <path className={(props.active) ? props.classes.active : props.classes.default } d={iconPaths[props.icon]}></path>
         </svg>
-      </IconButton>
     )
   }
 })
-
-export default Icon
+export default withStyles(styles)(Icon)

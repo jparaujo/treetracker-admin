@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { API_ROOT } from '../paths.js'
+import { API_ROOT } from '../common/variables.js'
 
 
 const trees = {

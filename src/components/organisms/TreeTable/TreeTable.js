@@ -8,7 +8,6 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableRow from '@material-ui/core/TableRow'
 import TablePagination from '@material-ui/core/TablePagination'
-import Paper from '@material-ui/core/Paper'
 import dateFormat from 'dateformat'
 import Checkbox from '@material-ui/core/Checkbox'
 import Tooltip from '@material-ui/core/Tooltip'
@@ -96,8 +95,8 @@ class TreeTable extends Component {
   render() {
     const { numSelected, classes, rowsPerPage, selected, order, orderBy, treesArray, getLocationName, treeCount, byId } = this.props
     return (
-      <Paper className={classes.tableBody}>
-        <Table>
+      <div >
+        <Table className={classes.tableBody}>
           {/*
            State handling betweenn treetable and EnhancedTableHead are a non-reduxy right now
            We should probably fix that, but it's not a huge problem. Consistency though.
@@ -158,7 +157,7 @@ class TreeTable extends Component {
           onChangePage={this.onPageChange}
           onChangeRowsPerPage={this.onChangeRowsPerPage}
         />
-      </Paper>
+      </div>
     )
   }
 }

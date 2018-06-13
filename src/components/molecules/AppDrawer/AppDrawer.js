@@ -15,37 +15,50 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 import Icon from '../../atoms/Icon/Icon'
 import { drawerWidth } from '../../../common/variables'
 
-const styles = theme => ({
-  hide: {
-    display: 'none',
-  },
-  drawerPaper: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    whiteSpace: 'nowrap',
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  listItem: {
-    paddingLeft: theme.spacing.unit * 1.5,
-    paddingRight: 0
-  },
-  drawerPaperClose: {
-    overflowX: 'hidden',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    width: theme.spacing.unit * 7,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 9,
-    },
+const styles = (theme) => {
+  let activeIcon = {
+    backgroundColor: theme.palette.primary.main,
+    color: 'white'
   }
-});
+  return ({
+    hide: {
+      display: 'none',
+    },
+    drawerPaper: {
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      whiteSpace: 'nowrap',
+      width: drawerWidth,
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+    tabList: {
+      paddingTop: theme.spacing.unit * 2
+    },
+    listItem: {
+      paddingLeft: theme.spacing.unit * 1.5,
+      paddingRight: 0
+    },
+    iconButton: {
+      '&.active': activeIcon,
+      '&:active': activeIcon
+    },
+    drawerPaperClose: {
+      overflowX: 'hidden',
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      width: theme.spacing.unit * 7,
+      [theme.breakpoints.up('sm')]: {
+        width: theme.spacing.unit * 9,
+      },
+    }
+  })
+};
 
 const navItems = [
     {
@@ -62,15 +75,9 @@ const navItems = [
 
 class AppDrawer extends Component {
 
-  constructor(props) {
-    super(props)
-
-  }
-
   componentDidMount() {
     // this is where we may check in for logged in state and dispatch async calls for doing so
   }
-
 
   render() {
     const { isOpen, changeCurrentView, closeAppDrawer, currentView, classes, theme } = this.props
@@ -88,7 +95,7 @@ class AppDrawer extends Component {
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
         </div>
-        <List>
+        <List className={classes.tabList}>
           {navItems.map(item => {
             return (
               <ListItem className={(!isOpen) ? classes.listItem : ''} key={item.id} button onClick={
@@ -98,7 +105,13 @@ class AppDrawer extends Component {
                 }
               }>
                 {isOpen && <ListItemText primary={item.label} />}
-                <Icon icon={item.icon} />
+                <IconButton
+                  color="inherit"
+                  aria-label="props.aria-label"
+                  className={classNames(classes.iconButton, (item.id === currentView) ? 'active' : '')}
+                >
+                  <Icon icon={item.icon} active={(item.id === currentView)}/>
+                </IconButton>
               </ListItem>
             )})
           }
