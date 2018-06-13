@@ -1,11 +1,15 @@
-import { API_ROOT } from './paths.js'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
-/*
- * Components
- */
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import AppFrame from './components/environments/AppFrame/AppFrame'
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#517147'
+    }
+  }
+})
 
 class App extends Component {
 
@@ -17,7 +21,9 @@ class App extends Component {
 
   render() {
     return(
-      <AppFrame />
+      <MuiThemeProvider theme={theme}>
+        <AppFrame />
+      </MuiThemeProvider>
     )
   }
 }
@@ -30,4 +36,5 @@ const mapDispatch = dispatch => ({
   requestTreeCount: id => dispatch.trees.requestTreeCount(),
   requestTrees: id => dispatch.trees.requestTrees()
 })
+
 export default connect(mapState, mapDispatch)(App)
