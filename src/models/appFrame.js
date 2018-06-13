@@ -18,7 +18,7 @@ const appFrame = {
       return { currentView: state.currentView, appDrawer: { isOpen: false }}
     },
     changeCurrentView(payload, state) {
-      console.log('æææææ', payload.currentView, state)
+      console.log('| reduceer | changeCurrentView | » ', payload.currentView, state)
       return { currentView: payload.currentView, appDrawer: { isOpen: state.isOpen } }
     }
   }

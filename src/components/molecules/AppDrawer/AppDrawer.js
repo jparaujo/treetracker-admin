@@ -94,7 +94,7 @@ class AppDrawer extends Component {
             return (
               <ListItem key={item.id} button onClick={
                 function(e) {
-                  console.log('navItemClick»»', item)
+                  console.log('navItemClicked »»', item)
                   changeCurrentView(item.id)
                 }
               }>
