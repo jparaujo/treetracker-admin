@@ -74,8 +74,8 @@ class AppDrawer extends Component {
 
 
   render() {
-    const { isOpen, changeCurrentView, closeAppDrawer, classes, theme } = this.props
-    console.log("| Appdrawer render | » |", this.props)
+    const { isOpen, changeCurrentView, closeAppDrawer, currentView, classes, theme } = this.props
+    console.log("| Appdrawer | render | currentView  » |", currentView )
     return(
       <Drawer
         variant="permanent"
@@ -115,7 +115,8 @@ class AppDrawer extends Component {
 
 const mapState = (state) => {
   return {
-    isOpen: state.appFrame.appDrawer.isOpen
+    isOpen: state.appFrame.appDrawer.isOpen,
+    currentView: state.appFrame.currentView
   }
 }
 
